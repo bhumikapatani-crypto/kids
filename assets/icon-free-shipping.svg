@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="icon icon-free-shipping" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="4" y="13" width="21" height="16" rx="1"/>
+  <path d="M25 19h9.5L40 25v4h-15z"/>
+  <circle cx="14" cy="33.5" r="3.2"/>
+  <circle cx="33" cy="33.5" r="3.2"/>
+  <line x1="17" y1="33.5" x2="30" y2="33.5"/>
+  <text x="7.2" y="23.5" font-family="Arial, Helvetica, sans-serif" font-size="7" font-weight="700" stroke="none" fill="currentColor" letter-spacing="0.2">FREE</text>
+</svg>

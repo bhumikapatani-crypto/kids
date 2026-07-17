@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" class="icon icon-secure-payment" fill="none">
+  <rect x="3" y="11" width="28" height="20" rx="3" fill="currentColor"/>
+  <rect x="3" y="17" width="28" height="4" fill="var(--icon-ribbon-color, #fff)"/>
+  <path d="M28 25 44 25v10c0 4.4-3.6 7.6-8 8.7-4.4-1.1-8-4.3-8-8.7Z" fill="currentColor"/>
+  <path d="M32.5 33.5 35.5 36.5 40 30.5" stroke="var(--icon-check-color, #fff)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

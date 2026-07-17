@@ -1,0 +1,195 @@
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --two-banners-bg: {{ section.settings.background_color }};
+    --two-banners-max-width: {{ section.settings.max_width }}px;
+    --two-banners-radius: {{ section.settings.corner_radius }}px;
+    --two-banners-gap: {{ section.settings.desktop_gap }}px;
+    --two-banners-columns: {{ section.settings.desktop_columns }};
+    --two-banners-padding-x: {{ section.settings.desktop_padding_x }}px;
+    --two-banners-padding-top: {{ section.settings.desktop_padding_top }}px;
+    --two-banners-padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+  }
+
+  #shopify-section-{{ section.id }} .two-banners {
+    background: var(--two-banners-bg);
+    padding: var(--two-banners-padding-top) var(--two-banners-padding-x) var(--two-banners-padding-bottom);
+  }
+
+  #shopify-section-{{ section.id }} .two-banners__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--two-banners-columns), minmax(0, 1fr));
+    gap: var(--two-banners-gap);
+    width: 100%;
+    max-width: var(--two-banners-max-width);
+    margin-inline: auto;
+  }
+
+  #shopify-section-{{ section.id }} .two-banners__item {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+    height: {{ section.settings.desktop_height }}px;
+    border-radius: var(--two-banners-radius);
+    background: rgba(var(--color-foreground), 0.04);
+  }
+
+  #shopify-section-{{ section.id }} .two-banners__image,
+  #shopify-section-{{ section.id }} .two-banners__placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .two-banners__image {
+    object-fit: cover;
+    transition: transform 300ms ease;
+  }
+
+  #shopify-section-{{ section.id }} .two-banners__item--linked:hover .two-banners__image {
+    transform: scale({{ section.settings.hover_zoom | divided_by: 100.0 | plus: 1 }});
+  }
+
+  #shopify-section-{{ section.id }} .two-banners__placeholder {
+    color: rgba(var(--color-foreground), 0.35);
+  }
+
+  @media screen and (min-width: 750px) and (max-width: 989px) {
+    #shopify-section-{{ section.id }} {
+      --two-banners-gap: {{ section.settings.tablet_gap }}px;
+      --two-banners-columns: {{ section.settings.tablet_columns }};
+      --two-banners-padding-x: {{ section.settings.tablet_padding_x }}px;
+      --two-banners-padding-top: {{ section.settings.tablet_padding_top }}px;
+      --two-banners-padding-bottom: {{ section.settings.tablet_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .two-banners__item {
+      height: {{ section.settings.tablet_height }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #shopify-section-{{ section.id }} {
+      --two-banners-gap: {{ section.settings.mobile_gap }}px;
+      --two-banners-columns: {{ section.settings.mobile_columns }};
+      --two-banners-padding-x: {{ section.settings.mobile_padding_x }}px;
+      --two-banners-padding-top: {{ section.settings.mobile_padding_top }}px;
+      --two-banners-padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .two-banners__item {
+      height: {{ section.settings.mobile_height }}px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .two-banners__image { transition: none; }
+  }
+{%- endstyle -%}
+
+<div class="two-banners">
+  <div class="two-banners__grid">
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign desktop_image = block.settings.desktop_image | default: block.settings.mobile_image
+        assign mobile_image = block.settings.mobile_image | default: desktop_image
+        assign image_alt = block.settings.alt_text | default: desktop_image.alt | escape
+        assign loading_value = 'lazy'
+        assign fetch_priority = 'auto'
+        if section.index == 1
+          assign loading_value = 'eager'
+          assign fetch_priority = 'high'
+        endif
+      -%}
+
+      {%- if block.settings.link != blank -%}
+        <a class="two-banners__item two-banners__item--linked" href="{{ block.settings.link }}" aria-label="{{ image_alt | default: 'View banner' }}" {{ block.shopify_attributes }}>
+      {%- else -%}
+        <div class="two-banners__item" {{ block.shopify_attributes }}>
+      {%- endif -%}
+
+        {%- if desktop_image != blank -%}
+          <picture>
+            {%- if mobile_image != blank -%}
+              <source
+                media="(max-width: 749px)"
+                srcset="{{ mobile_image | image_url: width: 375 }} 375w, {{ mobile_image | image_url: width: 550 }} 550w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1100 }} 1100w"
+                sizes="{% if section.settings.mobile_columns == '2' %}50vw{% else %}100vw{% endif %}"
+              >
+            {%- endif -%}
+            {{ desktop_image | image_url: width: 2400 | image_tag: class: 'two-banners__image', widths: '550, 750, 1100, 1500, 2000, 2400', sizes: '(min-width: 990px) 50vw, 100vw', loading: loading_value, fetchpriority: fetch_priority, alt: image_alt, style: 'object-position: ' | append: block.settings.image_position | append: ';' }}
+          </picture>
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'two-banners__placeholder placeholder-svg' }}
+        {%- endif -%}
+
+      {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Two banners",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 2,
+  "settings": [
+    { "type": "header", "content": "General" },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "range", "id": "max_width", "min": 800, "max": 2400, "step": 20, "unit": "px", "label": "Maximum content width", "default": 1800 },
+    { "type": "range", "id": "corner_radius", "min": 0, "max": 40, "step": 1, "unit": "px", "label": "Banner corner radius", "default": 0 },
+    { "type": "range", "id": "hover_zoom", "min": 0, "max": 10, "step": 1, "unit": "%", "label": "Hover zoom", "default": 2 },
+
+    { "type": "header", "content": "Desktop" },
+    { "type": "select", "id": "desktop_columns", "label": "Banners per row", "options": [{"value":"1","label":"1"},{"value":"2","label":"2"}], "default": "2" },
+    { "type": "range", "id": "desktop_height", "min": 150, "max": 1000, "step": 10, "unit": "px", "label": "Banner height", "default": 620 },
+    { "type": "range", "id": "desktop_gap", "min": 0, "max": 80, "step": 2, "unit": "px", "label": "Gap", "default": 0 },
+    { "type": "range", "id": "desktop_padding_x", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Side padding", "default": 28 },
+    { "type": "range", "id": "desktop_padding_top", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Top padding", "default": 20 },
+    { "type": "range", "id": "desktop_padding_bottom", "min": 0, "max": 160, "step": 4, "unit": "px", "label": "Bottom padding", "default": 20 },
+
+    { "type": "header", "content": "Tablet" },
+    { "type": "select", "id": "tablet_columns", "label": "Banners per row", "options": [{"value":"1","label":"1"},{"value":"2","label":"2"}], "default": "2" },
+    { "type": "range", "id": "tablet_height", "min": 150, "max": 800, "step": 10, "unit": "px", "label": "Banner height", "default": 400 },
+    { "type": "range", "id": "tablet_gap", "min": 0, "max": 60, "step": 2, "unit": "px", "label": "Gap", "default": 12 },
+    { "type": "range", "id": "tablet_padding_x", "min": 0, "max": 80, "step": 4, "unit": "px", "label": "Side padding", "default": 20 },
+    { "type": "range", "id": "tablet_padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Top padding", "default": 16 },
+    { "type": "range", "id": "tablet_padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Bottom padding", "default": 16 },
+
+    { "type": "header", "content": "Mobile" },
+    { "type": "select", "id": "mobile_columns", "label": "Banners per row", "options": [{"value":"1","label":"1 (stacked)"},{"value":"2","label":"2 (side by side)"}], "default": "1" },
+    { "type": "range", "id": "mobile_height", "min": 120, "max": 700, "step": 10, "unit": "px", "label": "Banner height", "default": 300 },
+    { "type": "range", "id": "mobile_gap", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Gap", "default": 12 },
+    { "type": "range", "id": "mobile_padding_x", "min": 0, "max": 40, "step": 2, "unit": "px", "label": "Side padding", "default": 12 },
+    { "type": "range", "id": "mobile_padding_top", "min": 0, "max": 80, "step": 2, "unit": "px", "label": "Top padding", "default": 12 },
+    { "type": "range", "id": "mobile_padding_bottom", "min": 0, "max": 80, "step": 2, "unit": "px", "label": "Bottom padding", "default": 12 }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        { "type": "image_picker", "id": "desktop_image", "label": "Desktop image" },
+        { "type": "image_picker", "id": "mobile_image", "label": "Mobile image (optional)" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "alt_text", "label": "Image alt text", "info": "Describe the image for accessibility." },
+        { "type": "select", "id": "image_position", "label": "Image position", "options": [{"value":"left top","label":"Top left"},{"value":"center top","label":"Top center"},{"value":"right top","label":"Top right"},{"value":"left center","label":"Middle left"},{"value":"center center","label":"Middle center"},{"value":"right center","label":"Middle right"},{"value":"left bottom","label":"Bottom left"},{"value":"center bottom","label":"Bottom center"},{"value":"right bottom","label":"Bottom right"}], "default": "center center" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two banners",
+      "blocks": [{"type":"banner"},{"type":"banner"}]
+    }
+  ]
+}
+{% endschema %}
