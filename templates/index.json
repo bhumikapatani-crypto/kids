@@ -127,11 +127,168 @@
         "mobile_padding_top": 12,
         "mobile_padding_bottom": 12
       }
+    },
+    "djdemo_JzEx9d": {
+      "type": "Djdemo",
+      "blocks": {
+        "card_zM7hAx": {
+          "type": "card",
+          "settings": {
+            "alt_text": "",
+            "category": "ART & CRAFT",
+            "badge": "UPTO 80% OFF",
+            "button_label": "Explore Now",
+            "link": "",
+            "image_background": "#ffd472",
+            "border_color": "#efb4e8",
+            "category_color": "#d98200",
+            "badge_bg": "#16803c",
+            "badge_text_color": "#ffffff",
+            "button_bg": "#aa27bd",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "card_xp8Peh": {
+          "type": "card",
+          "settings": {
+            "alt_text": "",
+            "category": "COLLECTORS",
+            "badge": "UPTO 80% OFF",
+            "button_label": "Explore Now",
+            "link": "",
+            "image_background": "#ffc080",
+            "border_color": "#b7ded4",
+            "category_color": "#d98200",
+            "badge_bg": "#16803c",
+            "badge_text_color": "#ffffff",
+            "button_bg": "#00a191",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "card_QjhBh3": {
+          "type": "card",
+          "settings": {
+            "alt_text": "",
+            "category": "CONSTRUCTION\nTOYS",
+            "badge": "UPTO 70% OFF",
+            "button_label": "Explore Now",
+            "link": "",
+            "image_background": "#7594eb",
+            "border_color": "#ffc66a",
+            "category_color": "#d98200",
+            "badge_bg": "#16803c",
+            "badge_text_color": "#ffffff",
+            "button_bg": "#ff9400",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "card_jNYpLd": {
+          "type": "card",
+          "settings": {
+            "alt_text": "",
+            "category": "GAMES &\nPUZZLES",
+            "badge": "UPTO 80% OFF",
+            "button_label": "Explore Now",
+            "link": "",
+            "image_background": "#b7e8fa",
+            "border_color": "#c8eaf8",
+            "category_color": "#d98200",
+            "badge_bg": "#16803c",
+            "badge_text_color": "#ffffff",
+            "button_bg": "#2399e8",
+            "button_text_color": "#ffffff"
+          }
+        },
+        "card_tHVhcC": {
+          "type": "card",
+          "settings": {
+            "alt_text": "",
+            "category": "OUTDOOR\nTOYS",
+            "badge": "UPTO 50% OFF",
+            "button_label": "Explore Now",
+            "link": "",
+            "image_background": "#b9e6bf",
+            "border_color": "#c8e1b5",
+            "category_color": "#d98200",
+            "badge_bg": "#16803c",
+            "badge_text_color": "#ffffff",
+            "button_bg": "#48b24e",
+            "button_text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "card_zM7hAx",
+        "card_xp8Peh",
+        "card_QjhBh3",
+        "card_jNYpLd",
+        "card_tHVhcC"
+      ],
+      "name": "Rainy day mood cards",
+      "settings": {
+        "heading": "PICK YOUR RAINY DAY MOOD",
+        "subtitle": "It’s Raining Your Favourite Toys ☔",
+        "heading_color": "#9BDF12",
+        "subtitle_bg": "#ffc400",
+        "subtitle_color": "#073b66",
+        "background_color": "#d8f4ff",
+        "cloud_opacity": 75,
+        "max_width": 1200,
+        "header_gap": 60,
+        "uppercase_heading": true,
+        "heading_weight": "800",
+        "heading_spacing": 0,
+        "subtitle_margin": 8,
+        "subtitle_padding_x": 18,
+        "subtitle_padding_y": 10,
+        "card_background": "#ffffff",
+        "card_padding": 12,
+        "card_border_width": 2,
+        "card_radius": 16,
+        "image_radius": 12,
+        "category_top": 10,
+        "category_size": 18,
+        "mobile_category_size": 16,
+        "badge_size": 13,
+        "badge_right": 14,
+        "badge_padding_x": 13,
+        "badge_padding_y": 8,
+        "button_height": 44,
+        "button_gap": 12,
+        "button_radius": 24,
+        "button_size": 14,
+        "desktop_columns": 5,
+        "desktop_gap": 16,
+        "desktop_image_height": 200,
+        "desktop_heading_size": 40,
+        "desktop_subtitle_size": 18,
+        "desktop_padding_x": 40,
+        "desktop_padding_top": 44,
+        "desktop_padding_bottom": 40,
+        "tablet_columns": 3,
+        "tablet_gap": 16,
+        "tablet_image_height": 220,
+        "tablet_heading_size": 34,
+        "tablet_padding_x": 24,
+        "tablet_padding_top": 36,
+        "tablet_padding_bottom": 36,
+        "mobile_columns": "1",
+        "mobile_swipe": true,
+        "mobile_card_width": 75,
+        "mobile_gap": 12,
+        "mobile_image_height": 240,
+        "mobile_heading_size": 28,
+        "mobile_subtitle_size": 14,
+        "mobile_padding_x": 16,
+        "mobile_padding_top": 32,
+        "mobile_padding_bottom": 32
+      }
     }
   },
   "order": [
     "image_banner",
     "featured_collection",
-    "two_banners_KdgpMR"
+    "two_banners_KdgpMR",
+    "djdemo_JzEx9d"
   ]
 }
